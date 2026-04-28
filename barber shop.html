@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Legend | Premium Grooming</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark-bg: #050505;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: var(--dark-bg); color: var(--white); overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* GLASS NAVIGATION */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(15px); z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        .logo { font-family: 'Bebas Neue', cursive; font-size: 32px; letter-spacing: 2px; color: var(--gold); }
+        .logo span { color: white; }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+            url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=2074&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+        }
+        .hero h1 { font-family: 'Bebas Neue', cursive; font-size: 80px; line-height: 0.9; margin-bottom: 10px; }
+        .hero p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px; opacity: 0.8; margin-bottom: 30px; }
+        .btn-gold {
+            padding: 15px 40px; background: var(--gold); color: black;
+            text-decoration: none; font-weight: bold; text-transform: uppercase;
+            transition: 0.4s; border: 2px solid var(--gold);
+        }
+        .btn-gold:hover { background: transparent; color: var(--gold); box-shadow: 0 0 20px var(--gold); }
+
+        /* SERVICES GRID */
+        .section { padding: 100px 5%; text-align: center; }
+        .title { font-family: 'Bebas Neue', cursive; font-size: 50px; margin-bottom: 50px; color: var(--gold); }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card {
+            background: var(--card-bg); padding: 40px; border-radius: 15px;
+            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s; position: relative; overflow: hidden;
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--gold); }
+        .card i { font-size: 50px; color: var(--gold); margin-bottom: 20px; }
+
+        /* PRICE LIST (TABLE STYLE) */
+        .price-container { max-width: 800px; margin: 0 auto; background: var(--card-bg); padding: 30px; border-radius: 20px; }
+        .price-row {
+            display: flex; justify-content: space-between; padding: 15px 0;
+            border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+        }
+        .price-name { font-weight: 600; font-size: 18px; }
+        .price-val { color: var(--gold); font-weight: bold; }
+
+        /* TEAM SECTION */
+        .team-img { width: 100%; height: 350px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; filter: grayscale(100%); transition: 0.5s; }
+        .card:hover .team-img { filter: grayscale(0%); }
+
+        footer { padding: 50px; text-align: center; border-top: 1px solid var(--card-bg); font-size: 12px; opacity: 0.5; }
+
+        /* MOBILE FIX */
+        @media (max-width: 600px) { .hero h1 { font-size: 50px; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">BARBER<span>LEGEND</span></div>
+        <div class="menu"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <section class="hero">
+        <h1 data-aos="fade-up">Style is <span>Everything</span></h1>
+        <p data-aos="fade-up" data-aos-delay="200">Exclusive Grooming for the Modern Man</p>
+        <a href="https://wa.me/NOMOR_TEMEN_LU" class="btn-gold" data-aos="zoom-in">Booking Now</a>
+    </section>
+
+    <section class="section">
+        <h2 class="title" data-aos="fade-right">Our Services</h2>
+        <div class="grid">
+            <div class="card" data-aos="flip-left">
+                <i class="fas fa-cut"></i>
+                <h3>Precision Cut</h3>
+                <p>Potongan detail yang disesuaikan dengan struktur wajah lu.</p>
+            </div>
+            <div class="card" data-aos="flip-left" data-aos-delay="200">
+                <i class="fas fa-razor"></i>
+                <h3>Hot Towel Shave</h3>
+                <p>Cukur tradisional dengan handuk hangat biar makin seger.</p>
+            </div>
+            <div class="card" data-aos="flip-left" data-aos-delay="400">
+                <i class="fas fa-wind"></i>
+                <h3>Hair Styling</h3>
+                <p>Pomade & Styling premium biar tampilan makin ganteng.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: #080808;">
+        <h2 class="title">Price List</h2>
+        <div class="price-container" data-aos="zoom-in">
+            <div class="price-row"><span>Haircut & Wash</span> <span class="price-val">Rp 50.000</span></div>
+            <div class="price-row"><span>Classic Cut</span> <span class="price-val">Rp 35.000</span></div>
+            <div class="price-row"><span>Gentleman Shave</span> <span class="price-val">Rp 25.000</span></div>
+            <div class="price-row"><span>Full Grooming</span> <span class="price-val">Rp 100.000</span></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="title">Meet the Masters</h2>
+        <div class="grid">
+            <div class="card" data-aos="fade-up">
+                <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1974&auto=format&fit=crop" class="team-img">
+                <h3>Alex "The Fade"</h3>
+                <p>Master of Skin Fade & Taper.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974&auto=format&fit=crop" class="team-img">
+                <h3>Rizky "The Scissor"</h3>
+                <p>Ahli potongan klasik & struktur.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 BARBER LEGEND. Built by Rezkyy Store Team with ❤️<br>
+        Infinix Note 40 Power Series
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+    </script>
+</body>
+</html>
