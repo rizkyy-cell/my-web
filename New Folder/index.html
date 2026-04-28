@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>web.id/rezkyy</title>
+    
+    <meta property="og:title" content="REZKYY STORE - Premium Apps & Services">
+    <meta property="og:description" content="Toko Aplikasi Premium Terpercaya. 100% Original, Aman, & Bergaransi.">
+    <meta property="og:image" content="https://rezkyystoreidmobile.netlify.app/logo_wa.jpg"> 
+    <meta property="og:url" content="https://rezkyystoreidmobile.netlify.app/">
+    <meta property="og:type" content="website">
+
+    <style>
+        /* RESET & DASAR */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #000; color: white; display: flex; justify-content: center; overflow-x: hidden; }
+
+        /* INTRO OVERLAY */
+        #welcome-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s ease; }
+        #welcome-video { width: 100%; height: 100%; object-fit: cover; }
+        #skip-btn { position: absolute; bottom: 30px; right: 20px; color: white; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 8px 18px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); font-size: 12px; cursor: pointer; z-index: 10000; transition: all 0.2s ease; -webkit-tap-highlight-color: transparent; }
+        #skip-btn:active { transform: scale(0.9); background: rgba(255, 255, 255, 0.25); border: 1px solid rgba(255, 255, 255, 0.4); }
+
+        /* CONTAINER UTAMA */
+        .container { opacity: 0; transition: opacity 1s ease; width: 100%; max-width: 480px; background-color: rgba(4, 15, 43, 0.7); min-height: 100vh; padding-bottom: 50px; }
+        .container.show { opacity: 1; }
+        #bg-video { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -1; }
+
+        /* MENU GARIS TIGA & SIDEBAR */
+        .menu-btn { position: fixed; top: 20px; right: 20px; z-index: 1000; cursor: pointer; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 10px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2); -webkit-tap-highlight-color: transparent; }
+        .menu-btn div { width: 25px; height: 3px; background-color: white; margin: 5px 0; border-radius: 2px; transition: 0.4s; }
+        .menu-btn:active { transform: scale(0.85); background: rgba(255, 255, 255, 0.3); transition: 0.1s ease; }
+
+        .side-menu { position: fixed; top: 73px; right: 20px; width: 220px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; padding: 20px; z-index: 999; opacity: 0; visibility: hidden; transform: scale(0) translate(50px, -50px); transform-origin: top right; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .side-menu.active { opacity: 1; visibility: visible; transform: scale(1) translate(0, 0); }
+
+        /* ELEMEN INTERIOR */
+        .banner { width: 100%; height: 180px; background-image: url('banne.jpg'); background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; }
+        .banner h1 { font-family: 'Orbitron', sans-serif; font-size: 42px; font-weight: 900; text-align: center; letter-spacing: 4px; background: linear-gradient(to bottom, #fff, #b0c4de); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 4px 4px 15px rgba(0,0,0,0.8); margin-bottom: 10px; }
+        .profile-container { text-align: center; margin-top: -45px; }
+        .profile-img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid #040f2b; margin: 0 auto; object-fit: cover; }
+        .username {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 18px; /* Ukurannya gw gedein dikit biar kelihatan warnanya */
+    
+    /* MANTRA WARNA RGB */
+    background: linear-gradient(
+        to right, 
+        #ff0000, #ff7f00, #ffff00, #00ff00, 
+        #0000ff, #4b0082, #8b00ff, #ff0000
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* JALANKAN ANIMASI */
+    animation: rgb-animation 3s linear infinite;
+}
+
+/* KONTROL GERAKAN WARNA */
+@keyframes rgb-animation {
+    to {
+        background-position: 200% center;
+    }
+}
+        
+        /* GAYA IKON SOSIAL */
+        .social-icons { display: flex; justify-content: center; align-items: center; gap: 15px; margin: 15px 0 20px 0; }
+        .social-icons a { text-decoration: none; display: flex; justify-content: center; align-items: center; font-size: 22px; width: 30px; height: 30px; transition: transform 0.2s ease; -webkit-tap-highlight-color: transparent; }
+        .social-icons a img { width: 26px; height: 26px; object-fit: contain; border-radius: 6px; }
+        .social-icons a:active { transform: scale(0.7); }
+        
+        /* TOMBOL LINK LIQUID GLASS */
+        .link-wrapper { padding: 0 20px; }
+        .link-item { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); color: white; text-decoration: none; display: flex; align-items: center; padding: 10px; margin-bottom: 15px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2); -webkit-tap-highlight-color: transparent; }
+        .link-item:active { transform: scale(0.96); background: rgba(255, 255, 255, 0.2); box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2); transition: 0.1s ease; }
+        .icon-box { width: 40px; height: 40px; border-radius: 8px; display: flex; justify-content: center; align-items: center; margin-right: 15px; overflow: hidden; }
+        .icon-box img { width: 100%; height: 100%; object-fit: contain; }
+        .bg-green { background-color: #32cd32; } .bg-blue { background-color: #3b82f6; } .bg-lightgreen { background-color: #7cfc00; } .bg-purple { background-color: #4b0082; } .bg-orange { background-color: #ffa500; }
+        .cr-text { text-align: center; font-size: 12px; color: #b0c4de; margin-top: 40px; }
+        
+        /* GAYA NOTIFIKASI CUSTOM (TOAST) */
+        #custom-toast { position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.3); color: white; padding: 10px 24px; border-radius: 30px; font-size: 13px; font-weight: 500; z-index: 10000; opacity: 0; transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); pointer-events: none; }
+        #custom-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        
+        /* GAYA ETALASE PRODUK */
+        .product-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 16px; padding: 15px; margin: 0 20px 20px 20px; display: flex; flex-direction: column; gap: 12px; }
+
+        /* FIX GAMBAR 200X200 */
+        .product-img { width: 200px; height: 200px; margin: 0 auto 15px auto; border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2); display: flex; justify-content: center; align-items: center; position: relative; }
+        .product-img img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .product-info h3 { font-size: 16px; font-weight: bold; margin-bottom: 5px; }
+        .product-info p { font-size: 12px; color: #b0c4de; line-height: 1.4; margin-bottom: 8px; }
+        .product-price { font-size: 16px; font-weight: bold; color: #00ff7f; line-height: 1.5; }
+        .buy-btn { background: linear-gradient(135deg, #3b82f6, #4b0082); color: white; text-align: center; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 14px; transition: 0.2s ease; display: block; margin-top: 10px; }
+        .buy-btn:active { transform: scale(0.95); opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+    <div id="welcome-overlay">
+        <video id="welcome-video" playsinline autoplay muted>
+            <source src="video_welcome.mp4" type="video/mp4">
+        </video>
+        <div id="skip-btn" onclick="hideWelcome()">Skip Intro</div>
+    </div>
+
+    <div class="menu-btn" onclick="toggleMenu()">
+        <div></div><div></div><div></div>
+    </div>
+
+    <div id="sideMenu" class="side-menu">
+        <h3>ℹ️ About Me</h3>
+        <p>Halo! Saya Rizky, web ini dalam masa uji coba (beta). didukung oleh AI Gemini&ACODE.</p>
+        <br>
+        <p>Banyak orang baik di dunia ini, jika kau tak menemukan nya maka jadilah salah satu dari orang baik itu.</p>
+        <hr style="margin: 15px 0; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p style="font-size: 11px; color: #aaa;">Status: Online 🟢</p>
+    </div>
+
+    <video src="backround.mp4" id="bg-video" autoplay loop muted playsinline></video>
+
+    <div class="container" id="mainContent">
+        <div class="banner"><h1>REZKYY<br>STORE</h1></div>
+        <div class="profile-container">
+            <img src="https://rezkyystoreidmobile.netlify.app/profile.jpg" class="profile-img">
+            <div class="username">@rizky._kurniawan25</div>
+            <p class="bio">Hai, saya rizky, seorang yang hanya ingin menjadi seorang🗿.</p>
+        </div>
+        
+        <div class="social-icons">
+            <a href="https://wa.me/6285783511186?text=Halo%20Min,%20saya%20mau%20tanya%20gimana%20cara%20download%20APP%20MOD%20di%20Rezky%20Store.%20Tolong%20dibantu%20ya!%20🗿" target="_blank">📱</a>
+            <a href="https://discord.gg/zkbAJGDew"><img src="https://rezkyystoreidmobile.netlify.app/discord.jpg" alt="Discord"></a>
+            <a href="mailto:rezkyservices6@gmail.com" target="_blank">✉️</a>
+            <a href="https://t.me/Jr_Rezkyy"><img src="https://rezkyystoreidmobile.netlify.app/tele.jpg" alt="Tele"></a>
+            <a href="javascript:void(0)" onclick="copyLink()">🔗</a>
+        </div>
+
+        <hr style="margin: 15px 0; border-top: 1px solid rgba(255,255,255,0.1);">
+        
+        <div class="link-wrapper">
+            <a href="https://play.google.com/store/apps/details?id=tq.tech.Fps" class="link-item">
+                <div class="icon-box bg-lightgreen"><img src="https://rezkyystoreidmobile.netlify.app/120fps.jpg"></div>
+                <span>APP 120FPS PUBG</span>
+            </a>
+            <a href="https://go.arlinks.in/BMNPF" class="link-item">
+                <div class="icon-box bg-lightgreen"><img src="https://rezkyystoreidmobile.netlify.app/capcut.jpg"></div>
+                <span>CAPCUT MOD PRO</span>
+            </a>
+            <a href="https://whatsapp.com/channel/0029Vb7bjsnLY6dD0GSDIB1V" class="link-item">
+                <div class="icon-box bg-green"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"></div>
+                <span>SALURAN WHATSAPP</span>
+            </a>
+            <a href="https://www.tiktok.com/@rizky._kurniawan25?_r=1&_t=ZS-95h19aAwyns" class="link-item">
+                <div class="icon-box bg-orange"><img src="https://rezkyystoreidmobile.netlify.app/tiktok.jpg"></div>
+                <span>TIK TOK</span>
+            </a>
+            <a href="https://www.instagram.com/rizky._kurniawan25?igsh=MTdyZjZvNHRxajg0cA==" class="link-item">
+                <div class="icon-box bg-blue"><img src="https://rezkyystoreidmobile.netlify.app/Instagram.jpg"></div>
+                <span>INSTAGRAM</span>
+            </a>
+            <a href="https://sociabuzz.com/rizkyy_25/tribe" class="link-item">
+                <div class="icon-box bg-orange"><img src="https://rezkyystoreidmobile.netlify.app/socialbuz.png"></div>
+                <span>SUPPORTS</span>
+            </a>
+        </div>
+        
+        <hr style="margin: 15px 0; border-top: 1px solid rgba(255,255,255,0.1);">
+        <h2 style="text-align: center; font-size: 18px; margin-bottom: 15px;">🌟 ETALASE APP PREMIUM</h2>
+        
+        <div class="product-card">
+            <div class="product-img">
+                <img src="https://rezkyystoreidmobile.netlify.app/am.jpg" alt="Produk 1">
+            </div>
+            <div class="product-info">
+                <h3>ALIGHT MOTION PRO</h3>
+                <p>Tingkatkan kualitas editanmu dengan Alight Motion Pro Original! Ini BUKAN aplikasi bajakan atau MOD ilegal. Keamanan akunmu terjamin 100%. Nikmati semua fitur Pro tanpa iklan, tanpa watermark, dan pastinya bisa update resmi langsung dari Play Store atau App Store.</p>
+                <div class="product-price">Rp 10k - 1thn</div>
+            </div>
+            <a href="https://wa.me/6285783511186?text=Halo%20Min,%20saya%20mau%20beli%20Alight%20Motion%20Pro.%20Apakah%20stoknya%20masih%20ada?" class="buy-btn" target="_blank">Beli Sekarang</a>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img">
+                <img src="https://rezkyystoreidmobile.netlify.app/capcutori.jpg" alt="Produk 2">
+            </div>
+            <div class="product-info">
+                <h3>CAPCUT PRO</h3>
+                <p>Tingkatkan kualitas editanmu dengan CapCut Pro Original! Ini BUKAN aplikasi bajakan atau MOD ilegal. Keamanan akunmu terjamin 100%. Nikmati semua fitur Pro (Efek, Transisi, Template Premium) tanpa iklan, tanpa watermark, dan pastinya bisa update resmi langsung dari Play Store atau App Store.</p>
+                <div class="product-price">
+                   Rp 7k - 7day <br> 
+                    Rp 15k - 1month <br> <span style="color: #ff0000; font-weight: bold;">
+                    Rp 60k - 6 month - SOLD</span>
+                </div>
+            </div>
+            <a href="https://wa.me/6285783511186?text=Halo%20Min,%20saya%20mau%20beli%20CapCut%20Pro.%20Boleh%20tanya-tanya%20dulu?" class="buy-btn" target="_blank">Beli Sekarang</a>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img">
+                <img src="https://rezkyystoreidmobile.netlify.app/yt.jpg" alt="Produk 3">
+            </div>
+            <div class="product-info">
+                <h3>YOUTUBE PRO (PREMIUM)</h3>
+                <p>
+                    <b>Deskripsi:</b><br>
+                    Nikmati nonton video tanpa gangguan iklan sama sekali! YouTube Premium versi Gsuite ini memberikan akses penuh fitur premium dengan harga yang jauh lebih miring.<br><br>
+                    ✨ <b>Fitur Utama:</b> Bebas Iklan (No Ads), Putar di Latar Belakang, & Download Video.<br>
+                    ✨ <b>Akses:</b> Menggunakan email baru dari admin (Gsuite).<br>
+                    ✨ <b>Durasi:</b> Full 1 Bulan.<br>
+                    ✨ <b>Keamanan:</b> 100% Aman dan Legal, bukan hasil crack.
+                </p>
+                <div class="product-price">Rp 18k - 1bln</div>
+            </div>
+            <a href="https://wa.me/6285783511186?text=Halo%20Min,%20saya%20mau%20order%20YouTube%20Premium%201%20Bulan.%20Apakah%20stoknya%20masih%20ready?" class="buy-btn" target="_blank">Beli Sekarang</a>
+        </div>
+                
+        <div class="cr-text">© 2026 REZKYY STORE. All Rights Reserved.</div>
+    </div>
+    
+    <div id="custom-toast">✅ Link berhasil disalin!</div>
+
+    <script>
+    const vdocon = document.getElementById('welcome-video');
+    const overlay = document.getElementById('welcome-overlay');
+    const content = document.getElementById('mainContent');
+
+    function hideWelcome() {
+        vdocon.pause(); overlay.style.opacity = '0';
+        setTimeout(() => { overlay.style.display = 'none'; content.classList.add('show'); }, 800);
+    }
+    
+    vdocon.onended = hideWelcome;
+
+    function toggleMenu() { document.getElementById('sideMenu').classList.toggle('active'); }
+    
+    function copyLink() {
+        const linkWeb = "https://rezkyystoreidmobile.netlify.app/"; 
+        navigator.clipboard.writeText(linkWeb).then(() => {
+            const toast = document.getElementById("custom-toast");
+            toast.classList.add("show");
+            setTimeout(() => { toast.classList.remove("show"); }, 2500);
+        }).catch(err => { console.log("Gagal menyalin link."); });
+    }
+
+    const clickSound = new Audio('klik.mp3');
+    const allButtons = document.querySelectorAll('.link-item, .social-icons a, .menu-btn, #skip-btn, .buy-btn');
+    allButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            clickSound.currentTime = 0; 
+            clickSound.play().catch(error => { console.log("Menunggu interaksi."); });
+        });
+    });
+    </script>
+</body>
+</html>
