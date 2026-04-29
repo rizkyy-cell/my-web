@@ -17,6 +17,14 @@
         /* RESET & DASAR */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #000; color: white; display: flex; justify-content: center; overflow-x: hidden; top: 0px !important; position: static !important; }
+        /* --- SCRIPT ANTI NYOLONG GAMBAR DI HP --- */
+img {
+    -webkit-touch-callout: none; /* Matiin pop-up menu pas ditahan di iOS/Android */
+    -webkit-user-select: none;   /* Gak bisa diselect/diblok */
+    user-select: none;
+    pointer-events: none;        /* Bikin gambar tembus pandang dari sentuhan jari */
+}
+
 
         /* INTRO OVERLAY */
         #welcome-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s ease; }
@@ -288,6 +296,19 @@
     }
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <script>
+// Mematikan Klik Kanan
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// Mematikan shortcut Inspect Element & View Source
+document.onkeydown = function(e) {
+    if (e.keyCode == 123) { return false; } // F12
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; } // Ctrl+Shift+I
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; } // Ctrl+Shift+C
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; } // Ctrl+Shift+J
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } // Ctrl+U
+}
+</script>
 
 </body>
 </html>
